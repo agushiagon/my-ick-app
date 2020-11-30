@@ -57,9 +57,7 @@ class App extends React.Component {
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
         var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-
         today = mm + '/' + dd + '/' + yyyy;
-
         return ` ${today} |  Time:${time}`;
     }
 
@@ -81,16 +79,13 @@ class App extends React.Component {
 
     handleEditSubmit() {
         const posts = [...this.state.posts];
-
         const editedPost = {
             ...posts[this.state.currentPostIndex],
             title: this.state.form.title,
             comment: this.state.form.comment,
             date: this.getTodaysDate()
         }
-
         posts[this.state.currentPostIndex] = editedPost;
-
         this.setState(prevState => {
             return {
                 posts: posts,
@@ -103,6 +98,17 @@ class App extends React.Component {
         });
     }
 
+    handleLike(i) {
+        const posts = [...this.state.posts];
+        const editedPost = {
+            ...posts[i],
+            isLiked: !posts[i].isLiked
+        }
+        posts[i] = editedPost;
+        this.setState({
+            posts: posts
+        });
+    }
 
 
 
@@ -117,9 +123,12 @@ class App extends React.Component {
                     <p>{e.comment}</p>
                     <div class="action">
                         <button type="button" title="Edit" onClick={() => this.handleEdit(i)}>Edit</button>
-                        <button type="button" title="Like" >Like</button>
+                        <button type="button" title="Like" onClick={() => this.handleLike(i)}> 
+                        { e.isLiked ? 'Unlike' : 'Like'}
+                        </button>
                         <button type="button" title="Delete"  onClick={() => this.handleDelete(i)}>Delete</button>
                     </div>
+                    <hr />
                 </li>
             )
         })
@@ -159,6 +168,7 @@ class App extends React.Component {
                 </form>
                 <hr/>
                 <h2>List of Posts</h2>
+                <hr/>
                 <ul>
                     {pst}
                 </ul>
