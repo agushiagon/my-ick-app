@@ -23,6 +23,19 @@ class App extends React.Component {
                     </div>
                         <input type="submit" /> 
                 </form>
+                <hr/>
+                <h2>List of Posts</h2>
+                <ul>
+                    <li class="row">
+                        <h5>Title: </h5>
+                        <p>Content:</p>
+                        <div class="action">
+                            <button type="button" title="Edit" >Edit</button>
+                            <button type="button" title="Like">Like</button>
+                            <button type="button" title="Delete">Delete</button>
+                        </div>
+                    </li>
+                </ul>
             </div>
         )
     }
