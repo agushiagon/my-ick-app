@@ -4,7 +4,7 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            
+
             posts: [],
 
             form: {
@@ -28,6 +28,9 @@ class App extends React.Component {
                             type='text'
                             id="title"
                             name='title'
+                            required
+                            minlength="3" 
+                            maxlength="30" 
                             ></input>
                     </div>
                     <div>
@@ -36,6 +39,9 @@ class App extends React.Component {
                             class="text-area"
                             id="comment"
                             name='comment'
+                            required
+                            minlength="3"
+                            maxlength="100" 
                         ></textarea>
                     </div>
                         <input type="submit" /> 
