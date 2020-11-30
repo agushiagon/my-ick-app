@@ -8,11 +8,13 @@ class App extends React.Component {
             form: {
                 title: '',
                 comment: ''
-            }
+            },
+            currentPostIndex: -1,
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleEditSubmit = this.handleEditSubmit.bind(this);
     }
 
     handleChange(event) {
@@ -69,6 +71,38 @@ class App extends React.Component {
         });
     }
 
+    handleEdit(i) {
+        const currentPost = this.state.posts.find((val, index) => index === i);
+        this.setState({
+            form: currentPost,
+            currentPostIndex: i
+        })
+    }
+
+    handleEditSubmit() {
+        const posts = [...this.state.posts];
+
+        const editedPost = {
+            ...posts[this.state.currentPostIndex],
+            title: this.state.form.title,
+            comment: this.state.form.comment,
+            date: this.getTodaysDate()
+        }
+
+        posts[this.state.currentPostIndex] = editedPost;
+
+        this.setState(prevState => {
+            return {
+                posts: posts,
+                currentPostIndex: -1,
+                form: {
+                    title: '',
+                    comment: '',
+                }
+            };
+        });
+    }
+
 
 
 
@@ -82,7 +116,7 @@ class App extends React.Component {
                     <span>Creation Date: {e.date}</span>
                     <p>{e.comment}</p>
                     <div class="action">
-                        <button type="button" title="Edit">Edit</button>
+                        <button type="button" title="Edit" onClick={() => this.handleEdit(i)}>Edit</button>
                         <button type="button" title="Like" >Like</button>
                         <button type="button" title="Delete"  onClick={() => this.handleDelete(i)}>Delete</button>
                     </div>
@@ -117,7 +151,11 @@ class App extends React.Component {
                             onChange={this.handleChange}
                         ></textarea>
                     </div>
-                        <input type="submit" onClick={this.handleSubmit}/>
+                    {
+                        this.state.currentPostIndex === -1 ?
+                        <input type="submit" onClick={this.handleSubmit}/> :
+                        <button type="submit" onClick={this.handleEditSubmit}>Edit Post</button>
+                    }
                 </form>
                 <hr/>
                 <h2>List of Posts</h2>
