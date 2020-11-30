@@ -119,7 +119,13 @@ class App extends React.Component {
         }, () => localStorage.setItem('posts', JSON.stringify(this.state.posts)));
     }
 
+    onKeyPress =(event) =>{
+        if (event.which === 13 /* Enter */) {
+          event.preventDefault();
 
+          this.handleSubmit();
+        }
+    }
 
 
     render() {
@@ -167,6 +173,7 @@ class App extends React.Component {
                             name='comment'
                             value={this.state.form.comment}
                             onChange={this.handleChange}
+                            onKeyDown={this.onKeyPress}
                         ></textarea>
                     </div>
                     {
