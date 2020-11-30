@@ -52,6 +52,22 @@ class App extends React.Component {
 
 
     render() {
+
+        const pst = this.state.posts.map((e, i) => {
+            return (
+                <li class="row" key={i}>
+                    <h5>{e.title} </h5>
+                    <p>{e.comment}</p>
+                    <div class="action">
+                        <button type="button" title="Edit">Edit</button>
+                        <button type="button" title="Like" >Like</button>
+                        <button type="button" title="Delete">Delete</button>
+                    </div>
+                </li>
+            )
+        })
+
+
         return (
             <div>
                 <form>
@@ -83,15 +99,7 @@ class App extends React.Component {
                 <hr/>
                 <h2>List of Posts</h2>
                 <ul>
-                    <li class="row">
-                        <h5>Title: </h5>
-                        <p>Content:</p>
-                        <div class="action">
-                            <button type="button" title="Edit" >Edit</button>
-                            <button type="button" title="Like">Like</button>
-                            <button type="button" title="Delete">Delete</button>
-                        </div>
-                    </li>
+                    {pst}
                 </ul>
             </div>
         )
