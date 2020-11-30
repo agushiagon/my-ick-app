@@ -150,7 +150,7 @@ class App extends React.Component {
 
 
         return (
-            <div>
+            <div class='container'>
                 <form>
                     <div>
                         <label for="title">Post Title: </label>
