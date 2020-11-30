@@ -1,3 +1,7 @@
+# Application Features
+This app is a simple Single Page Application that helps you create posts and edit them. You can create a post by filling required forms 
+and than hit enter or click submit, created post will be shown. You can edit a older post by clicking on edit. You can olso like/unlike a post. Created posts are saved in local storage and can be deleted any time by clicking Delete button.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
