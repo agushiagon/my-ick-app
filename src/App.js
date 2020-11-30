@@ -1,6 +1,23 @@
 import React from 'react';
 
 class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            
+            posts: [],
+
+            form: {
+                title: '',
+                comment: ''
+            },
+        }
+    }
+
+
+
+
+
     render() {
         return (
             <div>
