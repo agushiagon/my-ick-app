@@ -36,7 +36,8 @@ class App extends React.Component {
                     {
                         title: this.state.form.title,
                         comment: this.state.form.comment,
-                        isLiked: false
+                        isLiked: false,
+                        date: this.getTodaysDate(),
                     }
                 ],
                 form: {
@@ -45,6 +46,18 @@ class App extends React.Component {
                     },
                 };
             });
+    }
+
+    getTodaysDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+        today = mm + '/' + dd + '/' + yyyy;
+
+        return ` ${today} |  Time:${time}`;
     }
 
 
@@ -56,7 +69,8 @@ class App extends React.Component {
         const pst = this.state.posts.map((e, i) => {
             return (
                 <li class="row" key={i}>
-                    <h5>{e.title} </h5>
+                    <h3>{e.title} </h3>
+                    <span>Creation Date: {e.date}</span>
                     <p>{e.comment}</p>
                     <div class="action">
                         <button type="button" title="Edit">Edit</button>
