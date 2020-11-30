@@ -17,6 +17,15 @@ class App extends React.Component {
         this.handleEditSubmit = this.handleEditSubmit.bind(this);
     }
 
+    componentDidMount() {
+        const posts = JSON.parse(localStorage.getItem("posts"));
+        if (posts !== null) {
+            this.setState({
+                posts: posts
+            });
+        }
+    }
+
     handleChange(event) {
         const name = event.target.name;
 
@@ -48,7 +57,7 @@ class App extends React.Component {
                     comment: ''
                     },
                 };
-            });
+            }, () => localStorage.setItem('posts', JSON.stringify(this.state.posts)));
     }
 
     getTodaysDate() {
@@ -66,7 +75,7 @@ class App extends React.Component {
             return {
                 posts: prevState.posts.filter((item, index) => index !== i)
             }
-        });
+        }, () => localStorage.setItem('posts', JSON.stringify(this.state.posts)));
     }
 
     handleEdit(i) {
@@ -95,7 +104,7 @@ class App extends React.Component {
                     comment: '',
                 }
             };
-        });
+        }, () => localStorage.setItem('posts', JSON.stringify(this.state.posts)));
     }
 
     handleLike(i) {
@@ -107,7 +116,7 @@ class App extends React.Component {
         posts[i] = editedPost;
         this.setState({
             posts: posts
-        });
+        }, () => localStorage.setItem('posts', JSON.stringify(this.state.posts)));
     }
 
 
