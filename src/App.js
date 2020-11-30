@@ -12,6 +12,7 @@ class App extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     handleChange(event) {
@@ -60,6 +61,14 @@ class App extends React.Component {
         return ` ${today} |  Time:${time}`;
     }
 
+    handleDelete(i) {
+        this.setState(prevState => {
+            return {
+                posts: prevState.posts.filter((item, index) => index !== i)
+            }
+        });
+    }
+
 
 
 
@@ -75,7 +84,7 @@ class App extends React.Component {
                     <div class="action">
                         <button type="button" title="Edit">Edit</button>
                         <button type="button" title="Like" >Like</button>
-                        <button type="button" title="Delete">Delete</button>
+                        <button type="button" title="Delete"  onClick={() => this.handleDelete(i)}>Delete</button>
                     </div>
                 </li>
             )
