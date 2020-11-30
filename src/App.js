@@ -4,14 +4,47 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-
             posts: [],
-
             form: {
                 title: '',
                 comment: ''
-            },
+            }
         }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        const name = event.target.name;
+
+        this.setState(prevState => {
+            return {
+                form: {
+                    ...prevState.form,
+                    [name]: event.target.value
+                    },
+            }
+        });
+    }
+
+    handleSubmit() {
+
+        this.setState(prevState => {
+            return {
+                posts: [
+                    ...prevState.posts,
+                    {
+                        title: this.state.form.title,
+                        comment: this.state.form.comment,
+                        isLiked: false
+                    }
+                ],
+                form: {
+                    title: '',
+                    comment: ''
+                    },
+                };
+            });
     }
 
 
@@ -25,13 +58,15 @@ class App extends React.Component {
                     <div>
                         <label for="title">Post Title: </label>
                         <input
-                            type='text'
+                            type="text"
                             id="title"
                             name='title'
+                            value={this.state.form.title}
+                            onChange={this.handleChange}
                             required
-                            minlength="3" 
-                            maxlength="30" 
-                            ></input>
+                            minlength="5" 
+                            maxlength="100" 
+                        ></input>
                     </div>
                     <div>
                         <label for="comment">Comment: </label>
@@ -39,12 +74,11 @@ class App extends React.Component {
                             class="text-area"
                             id="comment"
                             name='comment'
-                            required
-                            minlength="3"
-                            maxlength="100" 
+                            value={this.state.form.comment}
+                            onChange={this.handleChange}
                         ></textarea>
                     </div>
-                        <input type="submit" /> 
+                        <input type="submit" onClick={this.handleSubmit}/>
                 </form>
                 <hr/>
                 <h2>List of Posts</h2>
